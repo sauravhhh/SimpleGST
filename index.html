@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleGST</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f8f8;
+            color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background-color: #fff;
+            color: #000;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 480px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #000;
+            background-color: transparent;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 300;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #666;
+            background-color: #f8f8f8;
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .radio-item:hover {
+            background-color: #f0f0f0;
+            border-color: #000;
+        }
+
+        .radio-item.active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .radio-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .gst-slabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .gst-btn {
+            padding: 12px;
+            border: 2px solid #000;
+            background-color: transparent;
+            color: #000;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .gst-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .gst-btn.active {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .results {
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 18px;
+            border-top: 2px solid #000;
+            padding-top: 15px;
+        }
+
+        .result-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .credit {
+            color: #666;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .calculator {
+                padding: 30px 20px;
+            }
+            
+            .gst-slabs {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>SimpleGST</h1>
+        
+        <div class="input-group">
+            <label for="amount">Enter Amount</label>
+            <input type="number" id="amount" placeholder="0.00" step="0.01" min="0">
+        </div>
+        
+        <div class="radio-group">
+            <div class="radio-item">
+                <input type="radio" id="taxable" name="amountType" value="taxable" checked>
+                <label for="taxable">Taxable Value</label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" id="total" name="amountType" value="total">
+                <label for="total">Total MRP</label>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label>GST Rate</label>
+            <div class="gst-slabs">
+                <button class="gst-btn active" data-rate="5">5%</button>
+                <button class="gst-btn" data-rate="12">12%</button>
+                <button class="gst-btn" data-rate="18">18%</button>
+                <button class="gst-btn" data-rate="28">28%</button>
+            </div>
+        </div>
+        
+        <div class="results">
+            <div class="result-item">
+                <span class="result-label">Taxable Value</span>
+                <span class="result-value" id="taxableValue">₹0.00</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">GST Amount</span>
+                <span class="result-value" id="gstAmount">₹0.00</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Total Amount</span>
+                <span class="result-value" id="totalAmount">₹0.00</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="credit">
+        Made with ❤️ by sauravhhh
+    </div>
+
+    <script>
+        let currentGstRate = 5;
+        
+        const amountInput = document.getElementById('amount');
+        const taxableRadio = document.getElementById('taxable');
+        const totalRadio = document.getElementById('total');
+        const gstButtons = document.querySelectorAll('.gst-btn');
+        const taxableValueDisplay = document.getElementById('taxableValue');
+        const gstAmountDisplay = document.getElementById('gstAmount');
+        const totalAmountDisplay = document.getElementById('totalAmount');
+        
+        function formatCurrency(amount) {
+            return `₹${amount.toFixed(2)}`;
+        }
+        
+        function setActiveRadio() {
+            document.querySelectorAll('.radio-item').forEach(item => {
+                const radio = item.querySelector('input[type="radio"]');
+                item.classList.toggle('active', radio.checked);
+            });
+        }
+        
+        function calculateGST() {
+            const amount = parseFloat(amountInput.value) || 0;
+            const isTaxableValue = taxableRadio.checked;
+            
+            let taxableValue, gstAmount, totalAmount;
+            
+            if (isTaxableValue) {
+                // Forward calculation: Taxable Value → Total
+                taxableValue = amount;
+                gstAmount = (taxableValue * currentGstRate) / 100;
+                totalAmount = taxableValue + gstAmount;
+            } else {
+                // Reverse calculation: Total → Taxable Value
+                totalAmount = amount;
+                taxableValue = totalAmount / (1 + currentGstRate / 100);
+                gstAmount = totalAmount - taxableValue;
+            }
+            
+            taxableValueDisplay.textContent = formatCurrency(taxableValue);
+            gstAmountDisplay.textContent = formatCurrency(gstAmount);
+            totalAmountDisplay.textContent = formatCurrency(totalAmount);
+        }
+        
+        function setActiveGstRate(rate) {
+            currentGstRate = rate;
+            gstButtons.forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.rate) === rate);
+            });
+            calculateGST();
+        }
+        
+        // Event listeners
+        amountInput.addEventListener('input', calculateGST);
+        taxableRadio.addEventListener('change', () => {
+            setActiveRadio();
+            calculateGST();
+        });
+        totalRadio.addEventListener('change', () => {
+            setActiveRadio();
+            calculateGST();
+        });
+        
+        // Add click handlers for radio items
+        document.querySelectorAll('.radio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const radio = item.querySelector('input[type="radio"]');
+                radio.checked = true;
+                setActiveRadio();
+                calculateGST();
+            });
+        });
+        
+        gstButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rate = parseInt(btn.dataset.rate);
+                setActiveGstRate(rate);
+            });
+        });
+        
+        // Initialize
+        setActiveRadio();
+        calculateGST();
+    </script>
+</body>
+</html>
