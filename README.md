@@ -18,7 +18,7 @@
 
 ## 🖼️ Preview
 
-![SimpleGST Calculator Preview](assets/simplegst-preview.png)
+![SimpleGST Calculator Preview](Assets/Screenshot_2025-08-17-16-35-08-416_com.android.chrome.jpg)
 
 *Clean, intuitive interface that works on any device*
 
