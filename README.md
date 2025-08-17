@@ -11,7 +11,6 @@
 - **Instant Results**: Real-time calculation as you type
 - **Mobile Optimized**: Works perfectly on phones, tablets, and desktop
 - **Clean Interface**: Minimalist design focused on clarity
-- **Copy Results**: One-click copy for quick sharing
 - **No Registration**: Use immediately without any setup
 
 ---
