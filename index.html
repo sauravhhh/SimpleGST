@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SimpleGST</title>
     <style>
         * {
@@ -207,16 +207,16 @@
         
         <div class="input-group">
             <label for="amount">Enter Amount</label>
-            <input type="number" id="amount" placeholder="0.00" step="0.01" min="0">
+            <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" />
         </div>
         
         <div class="radio-group">
             <div class="radio-item">
-                <input type="radio" id="taxable" name="amountType" value="taxable" checked>
+                <input type="radio" id="taxable" name="amountType" value="taxable" checked />
                 <label for="taxable">Taxable Value</label>
             </div>
             <div class="radio-item">
-                <input type="radio" id="total" name="amountType" value="total">
+                <input type="radio" id="total" name="amountType" value="total" />
                 <label for="total">Total MRP</label>
             </div>
         </div>
@@ -224,10 +224,10 @@
         <div class="input-group">
             <label>GST Rate</label>
             <div class="gst-slabs">
-                <button class="gst-btn active" data-rate="5">5%</button>
+                <button class="gst-btn active" data-rate="0">0%</button>
+                <button class="gst-btn" data-rate="5">5%</button>
                 <button class="gst-btn" data-rate="12">12%</button>
-                <button class="gst-btn" data-rate="18">18%</button>
-                <button class="gst-btn" data-rate="28">28%</button>
+                <button class="gst-btn" data-rate="40">40%</button>
             </div>
         </div>
         
@@ -252,8 +252,8 @@
     </div>
 
     <script>
-        let currentGstRate = 5;
-        
+        let currentGstRate = 0;
+
         const amountInput = document.getElementById('amount');
         const taxableRadio = document.getElementById('taxable');
         const totalRadio = document.getElementById('total');
@@ -261,24 +261,24 @@
         const taxableValueDisplay = document.getElementById('taxableValue');
         const gstAmountDisplay = document.getElementById('gstAmount');
         const totalAmountDisplay = document.getElementById('totalAmount');
-        
+
         function formatCurrency(amount) {
             return `₹${amount.toFixed(2)}`;
         }
-        
+
         function setActiveRadio() {
             document.querySelectorAll('.radio-item').forEach(item => {
                 const radio = item.querySelector('input[type="radio"]');
                 item.classList.toggle('active', radio.checked);
             });
         }
-        
+
         function calculateGST() {
             const amount = parseFloat(amountInput.value) || 0;
             const isTaxableValue = taxableRadio.checked;
-            
+
             let taxableValue, gstAmount, totalAmount;
-            
+
             if (isTaxableValue) {
                 // Forward calculation: Taxable Value → Total
                 taxableValue = amount;
@@ -290,12 +290,12 @@
                 taxableValue = totalAmount / (1 + currentGstRate / 100);
                 gstAmount = totalAmount - taxableValue;
             }
-            
+
             taxableValueDisplay.textContent = formatCurrency(taxableValue);
             gstAmountDisplay.textContent = formatCurrency(gstAmount);
             totalAmountDisplay.textContent = formatCurrency(totalAmount);
         }
-        
+
         function setActiveGstRate(rate) {
             currentGstRate = rate;
             gstButtons.forEach(btn => {
@@ -303,7 +303,7 @@
             });
             calculateGST();
         }
-        
+
         // Event listeners
         amountInput.addEventListener('input', calculateGST);
         taxableRadio.addEventListener('change', () => {
@@ -314,7 +314,7 @@
             setActiveRadio();
             calculateGST();
         });
-        
+
         // Add click handlers for radio items
         document.querySelectorAll('.radio-item').forEach(item => {
             item.addEventListener('click', () => {
@@ -324,14 +324,14 @@
                 calculateGST();
             });
         });
-        
+
         gstButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const rate = parseInt(btn.dataset.rate);
                 setActiveGstRate(rate);
             });
         });
-        
+
         // Initialize
         setActiveRadio();
         calculateGST();
