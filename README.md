@@ -30,10 +30,10 @@
 - **MRP/Final Amount**: Enter total amount including GST (for consumers)
 
 ### **Step 2**: Select GST Slab
-- **0%**: Essential items (Fresh fruits and vegetables, milk, eggs, unpackaged foodgrains, salt, certain life-saving drugs, and educational items like pencils and notebooks.)
-- **5%**: Merit items (Edible oils, packaged food items (like biscuits and pasta), basic household products (like soap and toothpaste), essential medicines, footwear priced up to ₹2,500, coal, and agricultural equipment.)
-- **12%**: Standard items (Consumer durables (such as air conditioners, TVs, refrigerators, and washing machines), small cars and motorcycles (up to 350cc), cement, auto parts, capital goods, and mobile phones.)
-- **40%**: Luxury items (Premium cars and motorcycles (over 350cc), luxury goods, carbonated and caffeinated beverages, tobacco, gambling, casinos, and certain lottery services.)
+- **0%**: **Essential items** (Fresh fruits and vegetables, milk, eggs, unpackaged foodgrains, salt, certain life-saving drugs, and educational items like pencils and notebooks.)
+- **5%**: **Merit items** (Edible oils, packaged food items (like biscuits and pasta), basic household products (like soap and toothpaste), essential medicines, footwear priced up to ₹2,500, coal, and agricultural equipment.)
+- **12%**: **Standard items** (Consumer durables (such as air conditioners, TVs, refrigerators, and washing machines), small cars and motorcycles (up to 350cc), cement, auto parts, capital goods, and mobile phones.)
+- **40%**: **Luxury items** (Premium cars and motorcycles (over 350cc), luxury goods, carbonated and caffeinated beverages, tobacco, gambling, casinos, and certain lottery services.)
 
 ### **Step 3**: Get Instant Results
 - **GST Amount**: Exact tax calculated
