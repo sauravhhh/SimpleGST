@@ -1,4 +1,4 @@
-const CACHE = 'simplegst-v1';
+const CACHE = 'simplegst-v2';
 const ASSETS = [
   './',
   'index.html',
